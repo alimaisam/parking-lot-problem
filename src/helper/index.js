@@ -13,7 +13,7 @@ function findParking(spots) {
 }
 
 module.exports = {
-    park: function(allParkingSpots, input) {
+    parkCar: function(allParkingSpots, input) {
         if (findParking(allParkingSpots)) {
             var spot = findParking(allParkingSpots);
             spot.Car = Car.enter(input.split(" ")[1], input.split(" ")[2]);
@@ -21,11 +21,10 @@ module.exports = {
             console.log("Allocated slot number: " + spot.spotNumber);
         } else {
             console.log("Sorry, parking lot is full");
-        }
-                
+        }  
     },
 
-    leave: function(allParkingSpots, input) {
+    leaveParkingLot: function(allParkingSpots, input) {
         if (allParkingSpots.length > 0) {
             var index = parseInt(input.split(" ")[1]) - 1;
             if(index > -1 && index <= allParkingSpots.length) {
@@ -36,7 +35,7 @@ module.exports = {
             }
         }
     },
-    status: function (allParkingSpots) {
+    getStatus: function (allParkingSpots) {
         const header = ["Slot No.", "Registration No.", "Color"].join("\t");
         var strBuilder = [];
         strBuilder.push(header);

@@ -21,15 +21,15 @@ module.exports = {
                 }
                 case 'park': {
                     
-                    Utils.park(lot.parkingSpots, command)
+                    Utils.parkCar(lot.parkingSpots, command)
                     break;
                 } 
                 case 'leave': {
-                    Utils.leave(lot.parkingSpots, command)
+                    Utils.leaveParkingLot(lot.parkingSpots, command)
                     break;
                 } 
                 case 'status': {
-                    Utils.status(lot.parkingSpots);
+                    Utils.getStatus(lot.parkingSpots);
                     break;
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
@@ -44,7 +44,10 @@ module.exports = {
                     Utils.getSlotNumberForCar(lot.parkingSpots, command)
                     break;
                 } 
-                default : return false;
+                default : {
+                    console.log("Please try other command");
+                    break;
+                };
             }
         } else {
 
