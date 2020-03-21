@@ -20,23 +20,6 @@ function findParking(spots) {
     }
 }
 
-function leaveParkingSpot(spots, spotNumber) {
-    if (spots.length > 0) {
-        var index = parse.Int(spotNumber) - 1;
-        if(index > -1 && index <= spots.length) {
-            var spot = spots[index];
-            spot.Vehicle = null;
-            spot.available = true;
-
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-}
-
 module.exports = {
     create: function(spots) {
         for(var i = 0; i < spots; i++) {
