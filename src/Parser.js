@@ -1,5 +1,5 @@
 const ParkingLot = require("./models/ParkingLot")
-const Utils = require("./helper")
+const Utils = require("./helper");
 
 const validCommands = ['create_parking_lot', 'park', 'leave', 'status', 'registration_numbers_for_cars_with_colour', 'slot_numbers_for_cars_with_colour', 'slot_number_for_registration_number'];
 var lot = {};
@@ -8,33 +8,7 @@ module.exports = {
         const commands = data.split("\n");
         for (var i = 0; i < commands.length; i++) {
             const output = this.parseCommandAndExecute(commands[i]);
-
-            switch(output.type) {
-                case 'parking-lot': {
-                    console.log("Created a parking lot with " + output.data + " slots");
-                    break;
-                }
-                case 'park-car': {
-                    output.data > 0 ? console.log("Allocated slot number: " + output.data) : console.log("Sorry, parking lot is full");
-                    break;
-                }
-                case 'leave-parking': {
-                    output.data > 0 ? console.log("Slot number " + output.data + " is free") : console.log("Spot Number not found");
-                    break;
-                }
-                case 'status-check': {
-                    console.log(output.data);
-                    break;
-                }
-                case 'fetch-data': {
-                    console.log(output.data);
-                    break;
-                }
-                case 'error': {
-                    console.log(output.data);
-                    break;
-                }
-            }
+            Utils.logOutput(output);
         }
     },
 

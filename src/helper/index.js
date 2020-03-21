@@ -95,5 +95,34 @@ module.exports = {
         }
 
         return spotNumber;
+    },
+
+    logOutput: function(output) {
+        switch(output.type) {
+            case 'parking-lot': {
+                console.log("Created a parking lot with " + output.data + " slots");
+                break;
+            }
+            case 'park-car': {
+                output.data > 0 ? console.log("Allocated slot number: " + output.data) : console.log("Sorry, parking lot is full");
+                break;
+            }
+            case 'leave-parking': {
+                output.data > 0 ? console.log("Slot number " + output.data + " is free") : console.log("Spot Number not found");
+                break;
+            }
+            case 'status-check': {
+                console.log(output.data);
+                break;
+            }
+            case 'fetch-data': {
+                console.log(output.data);
+                break;
+            }
+            case 'error': {
+                console.log(output.data);
+                break;
+            }
+        }
     }
 }

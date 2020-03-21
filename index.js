@@ -1,6 +1,7 @@
 const fs = require('fs');
-const parser = require('./src/Parser');
 const prompt = require('prompt');
+const parser = require('./src/Parser');
+const utils = require('./src/helper');
 
 var elements = process.argv;
 
@@ -8,7 +9,7 @@ if(elements[elements.length - 1] == 'true') {
     prompt.start();
     interact();
 } else {
-    const contents = fs.readFileSync('./data/file_input.txt', 'utf8');
+    const contents = fs.readFileSync(elements[2], 'utf8');
     parser.parseFileData(contents);
 }
 
@@ -20,7 +21,8 @@ function interact() {
           return;
         }
 
-        parser.parseCommandAndExecute(result.command);
+        const output = parser.parseCommandAndExecute(result.command);
+        utils.logOutput(output);
         interact();
     });
 }
