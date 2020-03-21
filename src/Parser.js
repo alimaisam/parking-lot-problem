@@ -9,8 +9,8 @@ module.exports = {
         for (var i = 0; i < commands.length; i++) {
             this.parseCommandAndExecute(commands[i]);
         }
-    },   
-    
+    },
+
     parseCommandAndExecute: function (command) {
         const splitCommand = command.split(' ');
         if (validCommands.indexOf(splitCommand[0]) > -1) {
@@ -20,7 +20,6 @@ module.exports = {
                     break;
                 }
                 case 'park': {
-                    
                     Utils.parkCar(lot.parkingSpots, command)
                     break;
                 } 
@@ -43,14 +42,10 @@ module.exports = {
                 case 'slot_number_for_registration_number': {
                     Utils.getSlotNumberForCar(lot.parkingSpots, command)
                     break;
-                } 
-                default : {
-                    console.log("Please try other command");
-                    break;
-                };
+                }
             }
         } else {
-
+            console.log("Please try other command");
         }
-    }
+    },
 };
