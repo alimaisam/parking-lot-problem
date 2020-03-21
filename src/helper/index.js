@@ -35,6 +35,7 @@ module.exports = {
             }
         }
     },
+    
     getStatus: function (allParkingSpots) {
         const header = ["Slot No.", "Registration No.", "Color"].join("\t");
         var strBuilder = [];
@@ -51,6 +52,7 @@ module.exports = {
         var status = strBuilder.join("\n");
         console.log(status);
     },
+
     getCarRegistrationNumberByColor: function (allParkingSpots, input) {
         const color = input.split(" ")[1];
         var regNumbers = [];
@@ -66,6 +68,7 @@ module.exports = {
             console.log("Not found");
         }
     },
+
     getSlotNumberByColor: function (allParkingSpots, input) {
         const color = input.split(" ")[1];
         var spotNumbers = [];
@@ -82,6 +85,7 @@ module.exports = {
             console.log("Not found");
         }
     },
+    
     getSlotNumberForCar: function (allParkingSpots, input) {
         const regNumber = input.split(" ")[1];
         var spotNumber = 0;
