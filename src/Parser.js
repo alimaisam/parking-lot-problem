@@ -1,7 +1,8 @@
 const ParkingLot = require("./models/ParkingLot")
+const ParkingSpot = require("./models/ParkingSpot")
 
 const validCommands = ['create_parking_lot', 'park', 'leave', 'status', 'registration_numbers_for_cars_with_colour', 'slot_numbers_for_cars_with_colour', 'slot_number_for_registration_number'];
-
+var lot = {};
 module.exports = {
     parseFile: function (data) {
         const commands = data.split("\n");
@@ -15,27 +16,31 @@ module.exports = {
         if (validCommands.indexOf(splitCommand[0]) > -1) {
             switch(splitCommand[0]) {
                 case 'create_parking_lot' : {
-                    const lot = ParkingLot.create(splitCommand[1]);
-                    console.log(lot.totalParkingSpots);
-                    console.log(["Created a parking lot with", splitCommand[1], "slots"].join(" "));
+                    lot = ParkingLot.create(splitCommand[1]);
+                    //console.log(["Created a parking lot with", lot.totalParkingSpots, "slots"].join(" "));
+                    break;
                 }
                 case 'park': {
-
+                    
+                    ParkingSpot.park(lot.parkingSpots, command)
+                    break;
                 } 
                 case 'leave': {
-
+                    ParkingSpot.leave(lot.parkingSpots, command)
+                    break;
                 } 
                 case 'status': {
-
+                    console.log(lot);
+                    break;
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
-
+                    break;
                 } 
                 case 'slot_numbers_for_cars_with_colour': {
-
+                    break;
                 } 
                 case 'slot_number_for_registration_number': {
-
+                    break;
                 } 
                 default : return false;
             }
