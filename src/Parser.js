@@ -33,12 +33,15 @@ module.exports = {
                     break;
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
+                    Utils.getCarRegistrationNumberByColor(lot.parkingSpots, command);
                     break;
                 } 
                 case 'slot_numbers_for_cars_with_colour': {
+                    Utils.getSlotNumberByColor(lot.parkingSpots, command);
                     break;
                 } 
                 case 'slot_number_for_registration_number': {
+                    Utils.getSlotNumberForCar(lot.parkingSpots, command)
                     break;
                 } 
                 default : return false;
