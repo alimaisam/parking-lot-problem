@@ -9,7 +9,7 @@ if(elements[elements.length - 1] == 'true') {
     interact();
 } else {
     const contents = fs.readFileSync('./data/file_input.txt', 'utf8');
-    parser.parseFile(contents);
+    parser.parseFileData(contents);
 }
 
 function interact() {

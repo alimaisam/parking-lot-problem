@@ -4,10 +4,37 @@ const Utils = require("./helper")
 const validCommands = ['create_parking_lot', 'park', 'leave', 'status', 'registration_numbers_for_cars_with_colour', 'slot_numbers_for_cars_with_colour', 'slot_number_for_registration_number'];
 var lot = {};
 module.exports = {
-    parseFile: function (data) {
+    parseFileData: function (data) {
         const commands = data.split("\n");
         for (var i = 0; i < commands.length; i++) {
-            this.parseCommandAndExecute(commands[i]);
+            const output = this.parseCommandAndExecute(commands[i]);
+
+            switch(output.type) {
+                case 'parking-lot': {
+                    console.log("Created a parking lot with " + output.data + " slots");
+                    break;
+                }
+                case 'park-car': {
+                    output.data > 0 ? console.log("Allocated slot number: " + output.data) : console.log("Sorry, parking lot is full");
+                    break;
+                }
+                case 'leave-parking': {
+                    output.data > 0 ? console.log("Slot number " + output.data + " is free") : console.log("Spot Number not found");
+                    break;
+                }
+                case 'status-check': {
+                    console.log(output.data);
+                    break;
+                }
+                case 'fetch-data': {
+                    console.log(output.data);
+                    break;
+                }
+                case 'error': {
+                    console.log(output.data);
+                    break;
+                }
+            }
         }
     },
 
@@ -17,41 +44,66 @@ module.exports = {
             switch(splitCommand[0]) {
                 case 'create_parking_lot' : {
                     lot = ParkingLot.create(lot, splitCommand[1]);
-                    break;
+
+                    return {
+                        type: 'parking-lot',
+                        data: lot.totalParkingSpots
+                    }
                 }
                 case 'park': {
                     const spot = Utils.parkCar(lot.parkingSpots, command)
-                    spot > 0 ? console.log("Allocated slot number: " + spot.spotNumber) : console.log("Sorry, parking lot is full");
-                    break;
+                    
+                    return {
+                        type: 'park-car',
+                        data: spot
+                    }
                 } 
                 case 'leave': {
                     const spot = Utils.leaveParkingLot(lot.parkingSpots, command)
-                    spot > 0 ? console.log("Slot number " + spot.spotNumber + " is free") : console.log("Spot Number not found");
-                    break;
+                    
+                    return {
+                        type: 'leave-parking',
+                        data: spot
+                    }
                 } 
                 case 'status': {
                     const status = Utils.getStatus(lot.parkingSpots);
-                    console.log(status);
-                    break;
+                    
+                    return {
+                        type: 'status-check',
+                        data: status
+                    }
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
                     const regNumbers = Utils.getCarRegistrationNumberByColor(lot.parkingSpots, command);
-                    regNumbers.length === 0 ? console.log("Not found") : console.log(regNumbers.join(", "));
-                    break;
+                    
+                    return {
+                        type: 'fetch-data',
+                        data: regNumbers.length === 0 ? "Not found" : regNumbers.join(", ")
+                    }
                 } 
                 case 'slot_numbers_for_cars_with_colour': {
                     const spotNumbers = Utils.getSlotNumberByColor(lot.parkingSpots, command);
-                    spotNumbers.length === 0 ? console.log("Not found") : console.log(spotNumbers.join(", "));
-                    break;
+                    
+                    return {
+                        type: 'fetch-data',
+                        data: spotNumbers.length === 0 ? "Not found" : spotNumbers.join(", ")
+                    }
                 } 
                 case 'slot_number_for_registration_number': {
                     const spot = Utils.getSlotNumberForCar(lot.parkingSpots, command)
-                    spot === 0 ? console.log("Not found") : console.log(spot);
-                    break;
+                    
+                    return {
+                        type: 'fetch-data',
+                        data: spot === 0 ? "Not found" : spot
+                    }
                 }
             }
         } else {
-            console.log("Please try other command");
+            return {
+                type: 'error',
+                data: 'Command not valid'
+            }
         }
     },
 };

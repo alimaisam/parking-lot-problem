@@ -8,7 +8,6 @@ function ParkingLot(spots) {
 module.exports = {
     create: function(parkingLot, spots) {
         parkingLot = new ParkingLot(spots);
-        console.log("Created a parking lot with " + parkingLot.totalParkingSpots + " slots")
         return parkingLot;
     }
 }
