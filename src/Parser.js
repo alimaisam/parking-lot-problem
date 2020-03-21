@@ -20,27 +20,33 @@ module.exports = {
                     break;
                 }
                 case 'park': {
-                    Utils.parkCar(lot.parkingSpots, command)
+                    const spot = Utils.parkCar(lot.parkingSpots, command)
+                    spot > 0 ? console.log("Allocated slot number: " + spot.spotNumber) : console.log("Sorry, parking lot is full");
                     break;
                 } 
                 case 'leave': {
-                    Utils.leaveParkingLot(lot.parkingSpots, command)
+                    const spot = Utils.leaveParkingLot(lot.parkingSpots, command)
+                    spot > 0 ? console.log("Slot number " + spot.spotNumber + " is free") : console.log("Spot Number not found");
                     break;
                 } 
                 case 'status': {
-                    Utils.getStatus(lot.parkingSpots);
+                    const status = Utils.getStatus(lot.parkingSpots);
+                    console.log(status);
                     break;
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
-                    Utils.getCarRegistrationNumberByColor(lot.parkingSpots, command);
+                    const regNumbers = Utils.getCarRegistrationNumberByColor(lot.parkingSpots, command);
+                    regNumbers.length === 0 ? console.log("Not found") : console.log(regNumbers.join(", "));
                     break;
                 } 
                 case 'slot_numbers_for_cars_with_colour': {
-                    Utils.getSlotNumberByColor(lot.parkingSpots, command);
+                    const spotNumbers = Utils.getSlotNumberByColor(lot.parkingSpots, command);
+                    spotNumbers.length === 0 ? console.log("Not found") : console.log(spotNumbers.join(", "));
                     break;
                 } 
                 case 'slot_number_for_registration_number': {
-                    Utils.getSlotNumberForCar(lot.parkingSpots, command)
+                    const spot = Utils.getSlotNumberForCar(lot.parkingSpots, command)
+                    spot === 0 ? console.log("Not found") : console.log(spot);
                     break;
                 }
             }

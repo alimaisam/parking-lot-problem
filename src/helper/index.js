@@ -18,9 +18,9 @@ module.exports = {
             var spot = findParking(allParkingSpots);
             spot.Car = Car.enter(input.split(" ")[1], input.split(" ")[2]);
             spot.available = false;
-            console.log("Allocated slot number: " + spot.spotNumber);
+            return spot.spotNumber;
         } else {
-            console.log("Sorry, parking lot is full");
+            return 0;
         }  
     },
 
@@ -31,7 +31,9 @@ module.exports = {
                 var spot = allParkingSpots[index];
                 spot.Car = null;
                 spot.available = true;
-                console.log("Slot number " + spot.spotNumber + " is free")
+                return spot.spotNumber;
+            } else {
+                return 0;
             }
         }
     },
@@ -50,7 +52,7 @@ module.exports = {
         }
 
         var status = strBuilder.join("\n");
-        console.log(status);
+        return status;
     },
 
     getCarRegistrationNumberByColor: function (allParkingSpots, input) {
@@ -62,11 +64,9 @@ module.exports = {
                     regNumbers.push(allParkingSpots[i].Car.registrationNumber);
                 }
             }
+        } 
 
-            regNumbers.length === 0 ? console.log("Not found") : console.log(regNumbers.join(", "));
-        } else {
-            console.log("Not found");
-        }
+        return regNumbers;
     },
 
     getSlotNumberByColor: function (allParkingSpots, input) {
@@ -77,13 +77,10 @@ module.exports = {
                 if (allParkingSpots[i].Car.color === color) {
                     spotNumbers.push(allParkingSpots[i].spotNumber);
                 }
-            }
+            }  
+        } 
 
-            spotNumbers.length === 0 ? console.log("Not found") : console.log(spotNumbers.join(", "));
-            
-        } else {
-            console.log("Not found");
-        }
+        return spotNumbers;
     },
     
     getSlotNumberForCar: function (allParkingSpots, input) {
@@ -94,12 +91,9 @@ module.exports = {
                 if (allParkingSpots[i].Car.registrationNumber === regNumber) {
                     spotNumber = allParkingSpots[i].spotNumber;
                 }
-            }
-
-            spotNumber === 0 ? console.log("Not found") : console.log(spotNumber);
-            
-        } else {
-            console.log("Not found");
+            }   
         }
+
+        return spotNumber;
     }
 }
