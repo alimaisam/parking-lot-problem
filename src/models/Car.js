@@ -4,7 +4,7 @@ function Car(regNumber, color) {
 }
 
 module.exports = {
-    create: function(regNumber, color) {
+    enter: function(regNumber, color) {
         return new Car(regNumber, color);
     }
 }

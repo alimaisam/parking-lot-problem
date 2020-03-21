@@ -1,5 +1,5 @@
 const ParkingLot = require("./models/ParkingLot")
-const ParkingSpot = require("./models/ParkingSpot")
+const Utils = require("./helper")
 
 const validCommands = ['create_parking_lot', 'park', 'leave', 'status', 'registration_numbers_for_cars_with_colour', 'slot_numbers_for_cars_with_colour', 'slot_number_for_registration_number'];
 var lot = {};
@@ -16,21 +16,20 @@ module.exports = {
         if (validCommands.indexOf(splitCommand[0]) > -1) {
             switch(splitCommand[0]) {
                 case 'create_parking_lot' : {
-                    lot = ParkingLot.create(splitCommand[1]);
-                    //console.log(["Created a parking lot with", lot.totalParkingSpots, "slots"].join(" "));
+                    lot = ParkingLot.create(lot, splitCommand[1]);
                     break;
                 }
                 case 'park': {
                     
-                    ParkingSpot.park(lot.parkingSpots, command)
+                    Utils.park(lot.parkingSpots, command)
                     break;
                 } 
                 case 'leave': {
-                    ParkingSpot.leave(lot.parkingSpots, command)
+                    Utils.leave(lot.parkingSpots, command)
                     break;
                 } 
                 case 'status': {
-                    console.log(lot);
+                    Utils.status(lot.parkingSpots);
                     break;
                 } 
                 case 'registration_numbers_for_cars_with_colour': {
