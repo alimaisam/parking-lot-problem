@@ -35,8 +35,8 @@ commands from that file </br>
 
 ## Instructions to run: 
 
-- run `bin/setup.sh` to install all dependencies
+- run `bin/setup.sh` to install all dependencies and run test cases
 - run `bin/parking_lot.sh` to start parking lot app in cosole with a prompt
-- run `sh bin/parkiing_lot.sh <FILE_PATH>` to get input from file
+- run `sh bin/parkiing_lot.sh <FILE_PATH>` to get input data from file
 
 <br/>
