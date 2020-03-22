@@ -1,7 +1,7 @@
 # Parking Lot Problem
 
 ## Problem Statement:
------------------------
+
 I own a parking lot that can hold up to 'n' cars at any given point in time. Each slot is
 given a number starting at 1 increasing with increasing distance from the entry point
 in steps of one. I want to create an automated ticketing system that allows my
@@ -35,8 +35,8 @@ commands from that file </br>
 
 ## Instructions to run: 
 
-- run `bin/setup.sh` to install all dependencies and run test cases
-- run `bin/parking_lot.sh` to start parking lot app in cosole with a prompt
+- run `sh bin/setup.sh` to install all dependencies and run test cases
+- run `sh bin/parking_lot.sh` to start parking lot app in cosole with a prompt
 - run `sh bin/parkiing_lot.sh <FILE_PATH>` to get input data from file
 
 <br/>
